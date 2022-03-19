@@ -1,0 +1,41 @@
+#!/bin/sh
+#Thingy
+DISTRONAME=`lsb_release -a | tail +3 | head -n 1 | cut -c 14-`
+KERNALVER=`uname -r`
+##changer yourself
+PACKAGEMANAGER="xbps"
+##change yourself
+PACKAGEAMOUNT=`xbps-query -l | wc --l`
+DEFSHELL=`echo $SHELL | cut -c 6-`
+WINDOWMANAGER=`wmctrl -m | tail +1 | head -n -3 | cut -c 7-`
+#Colour
+GREEN=`tput setaf 2`
+RESET=`tput sgr0`
+#Print
+echo "${GREEN}╢  User:  ${RESET}${USER}"
+echo "${GREEN}╢Distro:  ${RESET}${DISTRONAME}"
+echo "${GREEN}╢Kernel:  ${RESET}${KERNALVER}"
+echo "${GREEN}╢  Pkgs:  ${RESET}${PACKAGEAMOUNT} (${PACKAGEMANAGER})"
+echo "${GREEN}╢ Shell:  ${RESET}${DEFSHELL}"
+echo "${GREEN}╢    WM:  ${RESET}${WINDOWMANAGER}"
+echo "${GREEN}╢  Term:  ${RESET}${TERM}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
