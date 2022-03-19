@@ -1,0 +1,14 @@
+#!/bin/sh
+echo "Filename(Do not add file extension as it may break the file.):"
+read filename
+echo "File extension(Deafult:mp4)"
+read extension
+case "$extension" in
+	"")cd /home/void/Media/Vids/screenrecordings && ffmpeg -video_size 3286x1080 -framerate 30 -f x11grab -i :0.0+0,0 -c:v libx264rgb -crf 0 -preset ultrafast $filename.mp4;;
+	*) cd /home/void/Media/Vids/screenrecordings && ffmpeg -video_size 3286x1080 -framerate 30 -f x11grab -i :0.0+0,0 -c:v libx264rgb -crf 0 -preset ultrafast $filename.$extension;;
+esac
+
+
+
+
+
