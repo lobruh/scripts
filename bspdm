@@ -1,0 +1,63 @@
+#!/bin/sh
+
+
+modifier="$1"
+monitorOne="$2"
+monitorTwo="$3"
+input="$4"
+amountDesktops=`bspc query -D --names | wc -l`
+
+case ${modifier} in
+	"-c") notify-send "${input}"
+				curMonitor=`eval bspc query -M -m --names`	
+				case ${curMonitor} in
+					"${monitorOne}") bspc desktop -f ${input};;
+					"${monitorTwo}") bspc desktop -f $((input + $((amountDesktops / 2))));;
+				esac;;
+	"-m")	notify-send "${input}" 
+				curMonitor=`eval bspc query -M -m --names`	
+				case ${curMonitor} in
+					"${monitorOne}") bspc node -d ${input} && bspc desktop -f ${input};;
+					"${monitorTwo}") bspc node -d $((input + $((amountDesktops / 2)))) && bspc desktop -f $((input + $((amountDesktops / 2))));;
+									esac;;
+	"-d") notify-send "${input}"
+				bspc desktop -f ${input} && bspc desktop -f $((input + $((amountDesktops / 2))));;
+	"-h"|*) echo "Control desktops with half the keys."
+				echo "bspdm [-cmh] <First/Main monitor> <Second Monitor> <input>"
+				echo "-Dependecy"	
+				echo "	-Dunst: Used for desktop number at the to Top-left."	
+				echo "-Monitors"	
+				echo "	-First/Main monitor: Monitor with 1..x desktop."
+				echo "	-Second monitor: Monitor with x+1..2x desktop."
+				echo "	-WARNING: PLEASE ONLY HAVE AN EVEN AMOUNT OF DESKTOPS!"	
+				echo "-Commands"
+				echo "	-c: Change desktop."
+				echo "	-m: Move and change desktop."
+				echo "	-h: Bring up this page/help page."
+esac
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
